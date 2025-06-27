@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: api-for-order-management
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/api_for_order_management?useTimezone=true&serverTimezone=UTC
+    username: root
+    password: 20182018Leo!
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect:
+    show-sql: false
+    open-in-view: false
+#spring.jpa.open.in.view
+logging:
+  level:
+    root: WARN
+    #br.com.erudio: DEBUG
