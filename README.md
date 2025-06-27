@@ -1,5 +1,5 @@
 API de Gestão - XYZ Tecnologia
-Este projeto é uma API RESTful desenvolvida em Java com Spring Boot para a Empresa XYZ Tecnologia. A solução visa ser o pilar inicial para um sistema completo de gestão de pedidos, começando com o gerenciamento de Clientes e Produtos.
+Este projeto é uma API RESTful desenvolvida em Java com Spring Boot para a Empresa fictícia XYZ Tecnologia. A solução visa ser o pilar inicial para um sistema completo de gestão de pedidos, começando com o gerenciamento de Clientes e Produtos.
 
 O objetivo é fornecer uma base sólida e escalável que permita, futuramente, a implementação de funcionalidades de gerenciamento de pedidos, otimizando os processos da equipe de vendas e melhorando a comunicação.
 
