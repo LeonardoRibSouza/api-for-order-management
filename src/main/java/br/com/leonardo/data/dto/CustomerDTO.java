@@ -1,30 +1,17 @@
-package br.com.leonardo.teste.model;
-
-import jakarta.persistence.*;
+package br.com.leonardo.data.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table
-public class Customer implements Serializable {
+
+public class CustomerDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name="name", nullable=false, length = 100)
     private String name;
-
-    @Column(name="cpf", nullable=false, length = 100)
     private String cpf;
-
-    @Column(name="telephone", nullable=false, length = 100)
     private String telephone;
-
-    @Column(name="address", nullable=false, length = 100)
     private String address;
 
     public Long getId() {
@@ -69,7 +56,7 @@ public class Customer implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Customer customers)) return false;
+        if (!(o instanceof CustomerDTO customers)) return false;
         return Objects.equals(getId(), customers.getId()) && Objects.equals(getName(), customers.getName()) && Objects.equals(getCpf(), customers.getCpf()) && Objects.equals(getTelephone(), customers.getTelephone()) && Objects.equals(getAddress(), customers.getAddress());
     }
 

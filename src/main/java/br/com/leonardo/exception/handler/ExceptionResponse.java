@@ -1,4 +1,4 @@
-package br.com.leonardo.teste.exception.handler;
+package br.com.leonardo.exception.handler;
 
 import java.util.Date;
 

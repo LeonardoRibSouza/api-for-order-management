@@ -1,7 +1,7 @@
-package br.com.leonardo.teste.controller;
+package br.com.leonardo.controller;
 
-import br.com.leonardo.teste.model.Product;
-import br.com.leonardo.teste.service.ProductService;
+import br.com.leonardo.model.Product;
+import br.com.leonardo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

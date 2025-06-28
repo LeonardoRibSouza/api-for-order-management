@@ -1,12 +1,12 @@
-package br.com.leonardo.teste.controller;
+package br.com.leonardo.controller;
 
-import br.com.leonardo.teste.model.Customer;
-import br.com.leonardo.teste.service.CustomerService;
+import br.com.leonardo.data.dto.CustomerDTO;
+import br.com.leonardo.model.Customer;
+import br.com.leonardo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,7 +20,7 @@ public class CustomerController {
     @GetMapping(value = "/findall",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public List<Customer> findAll(){
+    public List<CustomerDTO> findAll(){
         return customerService.findAll();
     }
 
@@ -29,28 +29,24 @@ public class CustomerController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public Customer register(@RequestBody Customer customer){
-        return customerService.register(customer);
+    public CustomerDTO register(@RequestBody CustomerDTO customer){
+        return customerService.create(customer);
     }
 
+    //atualizar cliente já cadastrado
     @PutMapping(value = "/update",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public Customer updateClient(@RequestBody Customer customer){
+    public CustomerDTO updateClient(@RequestBody CustomerDTO customer){
         return customerService.updateClient(customer);
     }
 
+    //deletar cliente cadastrado
     @DeleteMapping(value = "/delete/{id}")
     public void delete(@PathVariable("id") Long id){
         customerService.delete(id);
     }
 
-    @GetMapping(value = "/cpf/{numeroCpf}",
-            produces =  MediaType.APPLICATION_JSON_VALUE
-    )
-    public Customer findCustomerByCpf(@PathVariable("numeroCpf") String numeroCpf){
-        return customerService.findCustomerByCpf(numeroCpf);
-    }
 
 }

@@ -1,4 +1,4 @@
-package br.com.leonardo.teste.model;
+package br.com.leonardo.model;
 
 import jakarta.persistence.*;
 

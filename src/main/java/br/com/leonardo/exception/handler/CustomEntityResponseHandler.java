@@ -1,6 +1,6 @@
-package br.com.leonardo.teste.exception.handler;
+package br.com.leonardo.exception.handler;
 
-import br.com.leonardo.teste.exception.ResourceNotFoundException;
+import br.com.leonardo.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

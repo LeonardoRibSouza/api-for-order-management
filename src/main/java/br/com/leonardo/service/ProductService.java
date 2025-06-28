@@ -1,7 +1,7 @@
-package br.com.leonardo.teste.service;
+package br.com.leonardo.service;
 
-import br.com.leonardo.teste.model.Product;
-import br.com.leonardo.teste.repository.RepositoryProduct;
+import br.com.leonardo.model.Product;
+import br.com.leonardo.repository.RepositoryProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
