@@ -7,29 +7,30 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 @Entity
-@Table
-public class Order implements Serializable {
+@Table(name = "order_customer")
+public class OrderCustomer implements Serializable {
 
     private static final Long serialVersionUID = 1L;
+
+    public OrderCustomer() {
+        setStatus("order received");
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @Column(name = "customer_id", nullable = false)
+    private Long customerId;
+
+    @Column(name = "item_ordered", nullable = false)
     private ArrayList<ItemOrdered> items;
+
+    @Column(name="total", nullable = false)
     private BigDecimal Total;
+
+    @Column(name="status", nullable = false)
     private String status;
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 
     public Long getId() {
         return id;
@@ -37,6 +38,14 @@ public class Order implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
     public ArrayList<ItemOrdered> getItems() {
@@ -65,12 +74,12 @@ public class Order implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Order order)) return false;
-        return Objects.equals(getId(), order.getId()) && Objects.equals(getCustomer(), order.getCustomer()) && Objects.equals(getItems(), order.getItems()) && Objects.equals(getTotal(), order.getTotal()) && Objects.equals(getStatus(), order.getStatus());
+        if (!(o instanceof OrderCustomer that)) return false;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getCustomerId(), that.getCustomerId()) && Objects.equals(getItems(), that.getItems()) && Objects.equals(getTotal(), that.getTotal()) && Objects.equals(getStatus(), that.getStatus());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getCustomer(), getItems(), getTotal(), getStatus());
+        return Objects.hash(getId(), getCustomerId(), getItems(), getTotal(), getStatus());
     }
 }

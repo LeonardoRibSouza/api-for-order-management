@@ -1,4 +1,4 @@
-package br.com.leonardo.model;
+package br.com.leonardo.data.dto;
 
 import jakarta.persistence.*;
 
@@ -7,49 +7,35 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Entity
-@Table(name = "product")
-public class Product implements Serializable {
+
+public class ProductDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Product() {
+    public ProductDTO() {
         setCreatedAt(LocalDateTime.now());
         setStatus(true);
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "code", nullable = false, length = 50, unique = true)
     private String code;
 
-    @Column(name="brand",nullable = false, length = 50)
     private String brand;
 
-    @Column(name = "name", nullable = false, length = 50)
     private String name;
 
-    @Column(name = "description", nullable = false, length = 100)
     private String description;
 
-    @Column(name = "price", nullable = false, length = 10)
     private BigDecimal price;
 
-    @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-    @Column(name = "category", nullable = false, length = 50)
     private String category;
 
-    @Column(name = "created_At", nullable = false, length = 50)
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_At", length = 50)
     private LocalDateTime updatedAt;
 
-    @Column(name = "status", nullable = false, length = 50)
     private boolean status;
 
     public Long getId() {
@@ -142,7 +128,7 @@ public class Product implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Product product)) return false;
+        if (!(o instanceof ProductDTO product)) return false;
         return isStatus() == product.isStatus() && Objects.equals(getId(), product.getId()) && Objects.equals(getCode(), product.getCode()) && Objects.equals(getBrand(), product.getBrand()) && Objects.equals(getName(), product.getName()) && Objects.equals(getDescription(), product.getDescription()) && Objects.equals(getPrice(), product.getPrice()) && Objects.equals(getQuantity(), product.getQuantity()) && Objects.equals(getCategory(), product.getCategory()) && Objects.equals(getCreatedAt(), product.getCreatedAt()) && Objects.equals(getUpdatedAt(), product.getUpdatedAt());
     }
 

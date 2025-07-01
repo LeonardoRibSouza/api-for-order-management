@@ -1,7 +1,6 @@
 package br.com.leonardo.controller;
 
 import br.com.leonardo.data.dto.CustomerDTO;
-import br.com.leonardo.model.Customer;
 import br.com.leonardo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -30,7 +29,7 @@ public class CustomerController {
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     public CustomerDTO register(@RequestBody CustomerDTO customer){
-        return customerService.create(customer);
+        return customerService.register(customer);
     }
 
     //atualizar cliente já cadastrado

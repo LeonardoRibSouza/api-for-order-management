@@ -1,5 +1,7 @@
 package br.com.leonardo.service;
 
+import br.com.leonardo.data.dto.ProductDTO;
+import br.com.leonardo.exception.BusinessException;
 import br.com.leonardo.model.Product;
 import br.com.leonardo.repository.RepositoryProduct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.logging.Logger;
+import static br.com.leonardo.mapper.ObjectMapper.parseObject;
+import static br.com.leonardo.mapper.ObjectMapper.parseListObjects;
 
 @Service
 public class ProductService {
@@ -16,32 +20,43 @@ public class ProductService {
     private RepositoryProduct repository;
     private static final Logger log = Logger.getLogger(ProductService.class.getName());
 
-    public Product create(@RequestBody Product product) {
+
+    public ProductDTO register(@RequestBody ProductDTO product) {
         log.info("registering product");
-        return repository.save(product);
+
+        if(repository.existsByCode(product.getCode())){
+            throw new BusinessException("Product already registered");
+        }
+
+        var entity = parseObject(product, Product.class);
+        return parseObject(repository.save(entity), ProductDTO.class);
     }
 
 
-    public List<Product> findAll() {
+    public List<ProductDTO> findAll() {
         log.info("finding all products");
-        return repository.findAll();
+
+
+        return parseListObjects(repository.findAll(), ProductDTO.class);
     }
 
-    public Product update(Product product) {
+    public ProductDTO update(ProductDTO product) {
         log.info("updating product");
-        Product entity = repository.findById(product.getId()).get();
+        var entity = repository.findById(product.getId()).get();
         entity.setName(product.getName());
         entity.setDescription(product.getDescription());
         entity.setPrice(product.getPrice());
         entity.setCategory(product.getCategory());
-        return repository.save(entity);
+
+        return parseObject(repository.save(entity), ProductDTO.class);
     }
 
-    public Product updateProductQuantity(Product product) {
+    public ProductDTO updateProductQuantity(ProductDTO product) {
         log.info("updating product");
-        Product entity = repository.findById(product.getId()).get();
+        var entity = repository.findById(product.getId()).get();
         entity.setQuantity(product.getQuantity());
-        return repository.save(entity);
+
+        return parseObject(repository.save(entity), ProductDTO.class);
     }
 
     public void delete(Long id) {

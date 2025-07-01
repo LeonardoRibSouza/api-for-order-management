@@ -17,5 +17,4 @@ spring:
 #spring.jpa.open.in.view
 logging:
   level:
-    root: WARN
-    #br.com.erudio: DEBUG
+    root: warn

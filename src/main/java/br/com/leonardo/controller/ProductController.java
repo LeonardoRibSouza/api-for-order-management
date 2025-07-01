@@ -1,5 +1,6 @@
 package br.com.leonardo.controller;
 
+import br.com.leonardo.data.dto.ProductDTO;
 import br.com.leonardo.model.Product;
 import br.com.leonardo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +16,19 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    //registar pedido
     @PostMapping(value = "/register",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Product registerProduct (@RequestBody Product product) {
-        return productService.create(product);
+    public ProductDTO registerProduct (@RequestBody ProductDTO product) {
+        return productService.register(product);
     }
 
     @GetMapping(value = "/findall",
         produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public List<Product> findAll() {
+    public List<ProductDTO> findAll() {
         return productService.findAll();
     }
 
@@ -34,7 +36,7 @@ public class ProductController {
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Product updateProduct (@RequestBody Product product) {
+    public ProductDTO updateProduct (@RequestBody ProductDTO product) {
         return productService.update(product);
     }
 
@@ -42,7 +44,7 @@ public class ProductController {
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Product updateProductQuantity (@RequestBody Product product) {
+    public ProductDTO updateProductQuantity (@RequestBody ProductDTO product) {
         return productService.updateProductQuantity(product);
     }
 

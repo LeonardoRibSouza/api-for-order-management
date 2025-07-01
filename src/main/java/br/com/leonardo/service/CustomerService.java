@@ -1,6 +1,7 @@
 package br.com.leonardo.service;
 
 import br.com.leonardo.data.dto.CustomerDTO;
+import br.com.leonardo.exception.BusinessException;
 import br.com.leonardo.exception.ResourceNotFoundException;
 import br.com.leonardo.model.Customer;
 import br.com.leonardo.repository.RepositoryCustumer;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import static br.com.leonardo.mapper.ObjectMapper.parseObject;
 import static br.com.leonardo.mapper.ObjectMapper.parseListObjects;
+import static br.com.leonardo.validator.CpfValidator.checkCpf;
 
 @Service
 public class CustomerService {
@@ -22,8 +24,17 @@ public class CustomerService {
     private Logger log = Logger.getLogger(CustomerService.class.getName());
 
     //cadastrar novo cliente
-    public CustomerDTO create(@RequestBody CustomerDTO customer){
+    public CustomerDTO register(@RequestBody CustomerDTO customer){
         log.info("Registrando customer");
+
+        if (!checkCpf(customer.getCpf())){
+            throw new BusinessException("invalid CPF !!!");
+        };
+
+        if(repository.existsByCpf((customer.getCpf()))){
+            throw new BusinessException("There is already a user registered with this CPF");
+        }
+
         var entity = parseObject(customer, Customer.class);
         return parseObject(repository.save(entity), CustomerDTO.class);
     }
@@ -51,6 +62,7 @@ public class CustomerService {
     public void delete(Long id) {
         log.info("Deleting customer");
         Customer customer = repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No record found with id"));
+
         repository.delete(customer);
     }
 
